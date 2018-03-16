@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Nginx开启gzip压缩js无效解决办法]]></title>
+    <url>%2F2018%2F03%2F16%2FNginx%E5%BC%80%E5%90%AFgzip%E5%8E%8B%E7%BC%A9js%E6%97%A0%E6%95%88%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[nginx -t 查看配置信息12nginx: the configuration file /etc/nginx/nginx.conf syntax is oknginx: configuration file /etc/nginx/nginx.conf test is successful sudo vim /etc/nginx/nginx.conf 编辑配置文件；在http对象里面加入12345678http &#123; gzip on; gzip_min_length 1000; gzip_buffers 4 8k; gzip_http_version 1.1; gzip_types text/plain application/x-javascriptext/css application/xml application/javascripapplication/json; ...&#125; 相关字段儿解释1、开启gzipgzip on;2、启用gzip压缩的最小文件，小于设置值的文件将不会压缩gzip_min_length 1k;3、gzip 压缩级别，1-10，数字越大压缩的越好，也越占用CPU时间，后面会有详细说明gzip_comp_level 2;4、进行压缩的文件类型。javascript有多种形式。其中的值可以在 mime.types 文件中找到。注意，gzip_types里面的内容一定要包含content-types里面的类型，不然无效gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png font/ttf font/otf image/svg+xml;5、是否在http header中添加Vary: Accept-Encoding，建议开启gzip_vary on;6、禁用IE 6 gzipgzip_disable “MSIE [1-6].“;7、开启缓存location ~* ^.+.(ico|gif|jpg|jpeg|png)$ { access_log off; expires 30d;} location ~* ^.+.(css|js|txt|xml|swf|wav)$ { access_log off; expires 24h;} location ~* ^.+.(html|htm)$ { expires 1h;} location ~* ^.+.(eot|ttf|otf|woff|svg)$ { access_log off; expires max;}]]></content>
+      <categories>
+        <category>Nginx</category>
+      </categories>
+      <tags>
+        <tag>gzip</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Nuxt框架下使用$root小技巧-(局部加载Loading)]]></title>
+    <url>%2F2018%2F01%2F29%2FNuxt%E6%A1%86%E6%9E%B6%E4%B8%8B%E4%BD%BF%E7%94%A8%24root%E5%B0%8F%E6%8A%80%E5%B7%A7-(%E5%B1%80%E9%83%A8%E5%8A%A0%E8%BD%BDLoading%E3%80%81%E8%BD%AC%E5%9C%BA%E5%8A%A8%E7%94%BB)%2F</url>
+    <content type="text"><![CDATA[使用场景： 在Vue（ssr）项目中，当用户进行交互的时，如果需要加上Loading动画（项目中Loading一般封装成了组件）时可以这样使用; 使用方法： 单页应用：在需要加载Loading组件的页面（这里的页面指components文件夹下面的组件）中，导入a.js直接调用即可; 多页应用：在pages目录下的需要加载Loading组件的页面中，导入a.js直接调用即可;^^^^^^^我是把js写在mixins里面的，当然也可以写在别的地方，比如utils中^^^^^^^12345678910111213141516171819202122// a.jsexport default &#123; methods: &#123; showLoading() &#123; this.$root.$children[0].loading = true &#125;, hideLoading() &#123; this.$root.$children[0].loading = false &#125; &#125;&#125;// xx.vue里面调用import AMixin from '../../mixins/a'export default &#123; mixins: [AMixin], methods: &#123; testFunc() &#123; this.showLoading() // open this.hideLoading() // close &#125; &#125;&#125; 总结：1、这里主要考察的是对$root的灵活运用；2、如果是全局页面跳转转场效果的话，Nuxt框架已经帮我们做了，我们直接自定义动画样式即可；此文提到的使用场景，我们就是复用这个组件]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Nuxt/Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[opacity和visiblity]]></title>
+    <url>%2F2017%2F09%2F10%2Fopacity%E5%92%8Cvisiblity%2F</url>
+    <content type="text"><![CDATA[opacity:设置父元素隐藏，设置子元素显示将失效 visiblity:设置父元素隐藏，设置子元素显示将成功 1234567891011121314151617181920.item1 &#123; width: 400px; height: 400px; padding: 100px; box-sizing: border-box; background-color: green; text-align: center; /*opacity: 0;*/ visibility: hidden&#125;.item2 &#123; width: 200px; height: 200px; background-color: fuchsia; /*opacity: 1;*/ visibility: visible&#125;&lt;div class="item1"&gt; &lt;div class="item2"&gt;&lt;/div&gt;&lt;/div&gt;]]></content>
+      <categories>
+        <category>javaScript</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用正则获取当前URL中的参数]]></title>
+    <url>%2F2017%2F06%2F09%2F%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8DURL%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[使用场景：在前台，当需要通过当前url这个的参数处理一些逻辑的时候，可以使用此方法。 函数如下：123456function getQueryString(name) &#123; var reg = new RegExp("(^|&amp;)" + name + "=([^&amp;]*)(&amp;|$)", "i"); var r = window.location.search.substr(1).match(reg); if (r != null) return unescape(r[2]); return null;&#125; 使用方法：name-参数名称为字符串形式。若当前链接后面的参数为?name=itonline&amp;sex=gg&amp;age=18，则获取name参数值的调用方式为：getQueryString(&quot;name&quot;);]]></content>
+      <categories>
+        <category>javaScript/正则表达式</category>
+      </categories>
+      <tags>
+        <tag>URL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JS中innerHTML、outerHTML、innerText、outerText的用法与区别]]></title>
+    <url>%2F2017%2F05%2F03%2FJS%E4%B8%ADinnerHTML%E3%80%81outerHTML%E3%80%81innerText%E3%80%81outerText%E7%9A%84%E7%94%A8%E6%B3%95%E4%B8%8E%E5%8C%BA%E5%88%AB%2F</url>
+    <content type="text"><![CDATA[–转自http://blog.163.com/yw_0721/blog/static/7164579720102932157759/ 在JS中可以使用： innerHTML:也就是从对象的起始位置到终止位置的全部内容,包括Html标签。 innerText:从起始位置到终止位置的内容, 但它去除Html标签。 outerHTML:除了包含innerHTML的全部内容外, 还包含对象标签本身。 outerText:设置(包括标签)或获取(不包括标签)对象的文本 。示例：123&lt;div id="test"&gt; &lt;span style="color:red"&gt;test1&lt;/span&gt; test2&lt;/div&gt; 123&lt;a href="javascript:alert(test.innerHTML)"&gt;innerHTML内容&lt;/a&gt;&lt;a href="javascript:alert(test.innerText)"&gt;innerText内容&lt;/a&gt;&lt;a href="javascript:alert(test.outerHTML)"&gt;outerHTML内容&lt;/a&gt; ###特别说明：innerHTML是符合W3C标准的属性，而innerText只适用于IE浏览器，因此，尽可能地去使用innerHTML，而少用innerText，如果要输出不含HTML标签的内容，可以使用innerHTML取得包含HTML标签的内容后，再用正则表达式去除HTML标签，下面是一个简单的符合W3C标准的示例：1&lt;a href="javascript:alert(document.getElementById('test').innerHTML.replace(/&lt;.+?&gt;/gim,''))"&gt;无HTML,符合W3C标准&lt;/a&gt;]]></content>
+      <categories>
+        <category>javaScript</category>
+      </categories>
+      <tags>
+        <tag>innerHTML、outerHTML、innerText、outerText</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[break-continue-return之间的区别]]></title>
+    <url>%2F2017%2F04%2F07%2Fbreak-continue-return%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB%2F</url>
+    <content type="text"><![CDATA[breakbreak 语句用于退出 switch 语句或循环语句(for, for … in, while, do … while)。当 break 语句用于 switch 语句中时，会跳出 switch 代码块(终止执行其代码)。如： 12345678910111213141516171819202122232425var day;switch (new Date().getDay()) &#123; case 0: day = "Sunday"; break; case 1: day = "Monday"; break; case 2: day = "Tuesday"; break; case 3: day = "Wednesday"; break; case 4: day = "Thursday"; break; case 5: day = "Friday"; break; case 6: day = "Saturday"; break;&#125;console.log(day); 当 break 语句用于for循环语句时，(跳出整个循环体)会终止执行循环，并执行循环后代码(如果有的话)。如： 12345678910(function ()&#123; var iSum = 0; for(var i = 1;i&lt;101;i++)&#123; if(i == 5)&#123; break; &#125; iSum +=i; &#125; console.log(iSum); //10&#125;()) continuecontinue 跳过当前条件的循环(用于跳过循环中的一个迭代，并继续执行循环中的下一个迭代)。continue 与 break语句的区别是， break 是结束整个循环体， continue 是结束单次循环。 注意： continue 语句（不带标签引用），只能用在循环或 switch 中。 12345678910111213141516171819202122//在 while 循环中var text = "";var i = 0;while (i &lt; 5) &#123; i++; if (i == 3) &#123; continue; &#125;console.log(i); //1,2,4,5&#125;//在 for 循环中(function ()&#123; var iSum = 0; for(var i = 1;i&lt;101;i++)&#123; if(i == 5)&#123; continue; &#125; iSum +=i; &#125; console.log(iSum); //5045&#125;()) returnreturn表示(结束整个方法体)终止函数的执行并返回函数的值。1234567891011121314151617181920212223242526272829//用法1(function ()&#123; var iSum = 0; for(var i = 1;i&lt;101;i++)&#123; if(i == 5)&#123; return; &#125; iSum +=i; &#125; console.log(iSum); //当i==5时，结束（return）了整个方法体，所以此时没有执行这行代码&#125;())//用法2(function ()&#123; var iSum = 0; for(var i = 1;i&lt;101;i++)&#123; if(i == 5)&#123; //return; i = A(i); &#125; iSum +=i; &#125; console.log(iSum); //5015,i 跳过了5，6，7，8，9，此时的i设为了10&#125;())function A(i)&#123; i+=5; return i; //i可选(非必填)。指定返回的函数值。如果忽略，A(i)函数将返回 undefined&#125; 总结：break:跳出整个循环体continue:跳过当前条件的循环return：结束当前方法体]]></content>
+      <categories>
+        <category>javaScript</category>
+      </categories>
+      <tags>
+        <tag>break/continue/return</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JS中typeof与instanceof的区别]]></title>
+    <url>%2F2017%2F04%2F07%2FJS%E4%B8%ADtypeof%E4%B8%8Einstanceof%E7%9A%84%E5%8C%BA%E5%88%AB%2F</url>
+    <content type="text"><![CDATA[JavaScript 中 typeof 和 instanceof 常用来判断一个变量是否为空，或者是什么类型的。区别：typeof typeof 是一个一元运算，放在一个运算数之前，运算数可以是任意类型。 它返回值是一个字符串，该字符串说明运算数的类型。typeof 一般只能返回如下几个结果： number,boolean,string,function,object,undefined。我们可以使用 typeof 来获取一个变量是否存在，如 if(typeof a!=”undefined”){alert(“ok”)}，而不要去使用 if(a) 因为如果 a 不存在（未声明）则会出错，对于 Array,Null 等特殊对象使用 typeof 一律返回 object，这正是 typeof 的局限性。 instanceof instanceof 用于判断一个变量是否某个对象的实例，如: 12345678910111213141516171819202122232425262728//判断a是否是Array的实例var a = new Array();console.log(a instanceof Array); //trueconsole.log(window instanceof Object); //true//所以，这里的 instanceof 测试的 object 是指 js 语法中的 object，不是指 dom 模型对象。console.log(a instanceof object); //true, 因为 Array 是 object 的子类//判断a是否是test的实例function test()&#123;&#125;;var a=new test();console.log(a instanceof test); //true // 判断 foo 是否是 Foo 类的实例 , 并且是否是其父类型的实例 function Aoo()&#123;&#125; function Foo()&#123;&#125; Foo.prototype = new Aoo();//JavaScript 原型继承 var foo = new Foo(); console.log(foo instanceof Foo)//true console.log(foo instanceof Aoo)//true //instanceof 复杂用法 console.log(Object instanceof Object);//true console.log(Function instanceof Function);//true console.log(Number instanceof Number);//false console.log(String instanceof String);//false console.log(Function instanceof Object);//true console.log(Foo instanceof Function);//true console.log(Foo instanceof Foo);//false 未完待续…]]></content>
+      <categories>
+        <category>javaScript</category>
+      </categories>
+      <tags>
+        <tag>typeof/instanceof</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[移动web页面，input、textarea获取焦点弹出系统虚拟键盘时，挡住input、textarea的解决方案]]></title>
+    <url>%2F2017%2F04%2F07%2F%E7%A7%BB%E5%8A%A8web%E9%A1%B5%E9%9D%A2%EF%BC%8Cinput%E3%80%81textarea%E8%8E%B7%E5%8F%96%E7%84%A6%E7%82%B9%E5%BC%B9%E5%87%BA%E7%B3%BB%E7%BB%9F%E8%99%9A%E6%8B%9F%E9%94%AE%E7%9B%98%E6%97%B6%EF%BC%8C%E6%8C%A1%E4%BD%8Finput%E3%80%81textarea%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%2F</url>
+    <content type="text"><![CDATA[使用场景 在移动web页面里，当点击input、textarea获取到焦点弹出系统虚拟键盘后，虚拟键盘挡住了输入框的情况；这种问题一般出现在部分android机型中，在ios机型中一般不会出现这个问题 在移动web页面里，只有可以滑动的时候就可以使用这个方法处理一些类似于锚点的问题，并非一定是输入框才可以使用 解决方案 通过js动态处理；在元素（输入框）被操作后，若元素在可视区域内，则不做处理。反之通过js将该元素的位置移动到可视区域内即可 使用W3C标准的scrollIntoView()、scrollIntoViewNeeded()方法处理,该方法就是让当前的元素滚动到浏览器窗口的可视区域内；两个方法共同使用可以兼容大部分的浏览器（移动端），该方法的参数类型是boolean值，默认参数是true。如果为true，元素的顶端将和其所在滚动区的可视区域的顶端对齐。反之，元素的底端将和其所在滚动区的可视区域的底端对齐。 使用方法 原生js里面 123456789101112131415161718192021&lt;body&gt; &lt;div class="chunk"&gt;&lt;/div&gt; &lt;div class="scrollIntoView"&gt;scrollIntoView top&lt;/div&gt; &lt;div class="scrollIntoViewIfNeeded-top"&gt;scrollIntoViewIfNeeded top&lt;/div&gt; &lt;div class="scrollIntoViewIfNeeded-bottom"&gt;scrollIntoViewIfNeeded botom&lt;/div&gt; &lt;script&gt; const scrollIntoView = document.querySelector('.scrollIntoView'); const scrollIntoViewIfNeededTop = document.querySelector('.scrollIntoViewIfNeeded-top'); const scrollIntoViewIfNeededBottom = document.querySelector('.scrollIntoViewIfNeeded-bottom'); const test = document.querySelector('.chunk'); scrollIntoView.addEventListener('click', function() &#123; test.scrollIntoView(true); &#125;); scrollIntoViewIfNeededTop.addEventListener('click', function() &#123; test.scrollIntoViewIfNeeded(true); &#125;); scrollIntoViewIfNeededBottom.addEventListener('click', function() &#123; test.scrollIntoViewIfNeeded(false); &#125;); &lt;/script&gt;&lt;/body&gt; vue里面 12345678910111213141516171819202122&lt;template&gt; &lt;li class=&quot;requirement-description&quot;&gt; &lt;div class=&quot;li-inner&quot;&gt; &lt;span&gt;测试数据&lt;/span&gt; &lt;textarea maxlength=&quot;200&quot; name=&quot;textarea&quot; @focus=&quot;textAreaFocus&quot; ref=&quot;textAreaF&quot;&gt;&lt;/textarea&gt; &lt;/div&gt; &lt;/li&gt;&lt;/template&gt;&lt;script&gt; export default &#123; name: &apos;Item-Textarea&apos;, methods: &#123; textAreaFocus() &#123; this.$refs.textAreaF.scrollIntoView(false) this.$refs.textAreaF.scrollIntoViewIfNeeded(false) &#125; &#125; &#125;&lt;/script&gt;]]></content>
+      <categories>
+        <category>javaScript</category>
+      </categories>
+      <tags>
+        <tag>scrollIntoView()、scrollIntoViewNeeded()</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[NodeJS 文件(夹)压缩/解压(zip/unzip)]]></title>
+    <url>%2F2017%2F03%2F23%2FNodeJS-%E6%96%87%E4%BB%B6-%E5%A4%B9-%E5%8E%8B%E7%BC%A9-%E8%A7%A3%E5%8E%8B-zip-unzip%2F</url>
+    <content type="text"><![CDATA[我使用的比较靠谱的,也比较简单.其中archiver很强大支持zip格式tar格式,只需要提供路径就可以压缩已存在的文件夹. 压缩：123456789101112131415var fs = require('fs');var archiver = require('archiver');var output = fs.createWriteStream('archiver-unzip.zip');var archive = archiver('zip');archive.on('error', function(err)&#123; throw err; &#125;);archive.pipe(output);archive.bulk([ &#123; src: ['archiver/**']&#125;]);archive.finalize(); 解压:1234var fs = require("fs");var unzip = require("unzip");fs.createReadStream('archiver-unzip.zip').pipe(unzip.Extract(&#123; path: 'unarchive' &#125;));]]></content>
+      <categories>
+        <category>nodeJs</category>
+      </categories>
+      <tags>
+        <tag>nodeJs/zip/unzip</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[webstorm下调试node提示：v8debug is not defined]]></title>
+    <url>%2F2017%2F03%2F23%2Fwebstorm%E4%B8%8B%E8%B0%83%E8%AF%95node%E6%8F%90%E7%A4%BA%EF%BC%9Av8debug-is-not-defined%2F</url>
+    <content type="text"><![CDATA[解决步骤：Run/Debug configurations -&gt;configuration-&gt;Node parameters: –expose_debug_as=v8debug]]></content>
+      <categories>
+        <category>WebStorm</category>
+      </categories>
+      <tags>
+        <tag>v8debug</tag>
+      </tags>
+  </entry>
+</search>

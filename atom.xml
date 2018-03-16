@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>IT在线</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://www.xxxhj.cn/"/>
+  <updated>2018-03-16T07:04:52.793Z</updated>
+  <id>http://www.xxxhj.cn/</id>
+  
+  <author>
+    <name>IT在线</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Nginx开启gzip压缩js无效解决办法</title>
+    <link href="http://www.xxxhj.cn/2018/03/16/Nginx%E5%BC%80%E5%90%AFgzip%E5%8E%8B%E7%BC%A9js%E6%97%A0%E6%95%88%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <id>http://www.xxxhj.cn/2018/03/16/Nginx开启gzip压缩js无效解决办法/</id>
+    <published>2018-03-16T06:47:31.000Z</published>
+    <updated>2018-03-16T07:04:52.793Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><h4 id="nginx-t-查看配置信息"><a href="#nginx-t-查看配置信息" class="headerlink" title="nginx -t 查看配置信息"></a>nginx -t 查看配置信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">nginx: the configuration file /etc/nginx/nginx.conf syntax is ok</div><div class="line">nginx: configuration file /etc/nginx/nginx.conf test is successful</div></pre></td></tr></table></figure></li><li><h4 id="sudo-vim-etc-nginx-nginx-conf-编辑配置文件；在http对象里面加入"><a href="#sudo-vim-etc-nginx-nginx-conf-编辑配置文件；在http对象里面加入" class="headerlink" title="sudo vim /etc/nginx/nginx.conf  编辑配置文件；在http对象里面加入"></a>sudo vim /etc/nginx/nginx.conf  编辑配置文件；在http对象里面加入</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">http &#123;</div><div class="line">  gzip on;</div><div class="line">  gzip_min_length  1000;</div><div class="line">  gzip_buffers     4 8k;   </div><div class="line">  gzip_http_version 1.1; </div><div class="line">  gzip_types       text/plain application/x-javascriptext/css application/xml application/javascripapplication/json;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></li><li><h4 id="相关字段儿解释"><a href="#相关字段儿解释" class="headerlink" title="相关字段儿解释"></a>相关字段儿解释</h4><p>1、<strong>开启gzip</strong><br>gzip on;<br>2、<strong>启用gzip压缩的最小文件，小于设置值的文件将不会压缩</strong><br>gzip_min_length 1k;<br>3、<strong>gzip 压缩级别，1-10，数字越大压缩的越好，也越占用CPU时间，后面会有详细说明</strong><br>gzip_comp_level 2;<br>4、<strong>进行压缩的文件类型。javascript有多种形式。其中的值可以在 mime.types 文件中找到。注意，gzip_types里面的内容一定要包含content-types里面的类型，不然无效</strong><br>gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png font/ttf font/otf image/svg+xml;<br>5、<strong>是否在http header中添加Vary: Accept-Encoding，建议开启</strong><br>gzip_vary on;<br>6、<strong>禁用IE 6 gzip</strong><br>gzip_disable “MSIE [1-6].“;<br>7、<strong>开启缓存</strong><br>location ~* ^.+.(ico|gif|jpg|jpeg|png)$ {<br>  access_log   off;<br>  expires      30d;<br>}</p></li></ul><p>location ~* ^.+.(css|js|txt|xml|swf|wav)$ {<br>    access_log   off;<br>    expires      24h;<br>}</p><p>location ~* ^.+.(html|htm)$ {<br>    expires      1h;<br>}</p><p>location ~* ^.+.(eot|ttf|otf|woff|svg)$ {<br>    access_log   off;<br>    expires max;<br>}</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ul&gt;
+&lt;li&gt;&lt;h4 id=&quot;nginx-t-查看配置信息&quot;&gt;&lt;a href=&quot;#nginx-t-查看配置信息&quot; class=&quot;headerlink&quot; title=&quot;nginx -t 查看配置信息&quot;&gt;&lt;/a&gt;nginx -t 查看配置信息&lt;/h4&gt;&lt;figure class=
+      
+    
+    </summary>
+    
+      <category term="Nginx" scheme="http://www.xxxhj.cn/categories/Nginx/"/>
+    
+    
+      <category term="gzip" scheme="http://www.xxxhj.cn/tags/gzip/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nuxt框架下使用$root小技巧-(局部加载Loading)</title>
+    <link href="http://www.xxxhj.cn/2018/01/29/Nuxt%E6%A1%86%E6%9E%B6%E4%B8%8B%E4%BD%BF%E7%94%A8$root%E5%B0%8F%E6%8A%80%E5%B7%A7-(%E5%B1%80%E9%83%A8%E5%8A%A0%E8%BD%BDLoading%E3%80%81%E8%BD%AC%E5%9C%BA%E5%8A%A8%E7%94%BB)/"/>
+    <id>http://www.xxxhj.cn/2018/01/29/Nuxt框架下使用$root小技巧-(局部加载Loading、转场动画)/</id>
+    <published>2018-01-28T17:27:31.000Z</published>
+    <updated>2018-01-28T18:23:03.217Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="使用场景："><a href="#使用场景：" class="headerlink" title="使用场景："></a>使用场景：</h3><ul><li>在Vue（ssr）项目中，当用户进行交互的时，如果需要加上Loading动画（项目中Loading一般封装成了组件）时可以这样使用;</li></ul><h3 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h3><ul><li>单页应用：在需要加载Loading组件的页面（这里的页面指components文件夹下面的组件）中，导入a.js直接调用即可;</li><li>多页应用：在pages目录下的需要加载Loading组件的页面中，导入a.js直接调用即可;<br>^^^^^^^我是把js写在mixins里面的，当然也可以写在别的地方，比如utils中^^^^^^^<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// a.js</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    methods: &#123;</div><div class="line">        showLoading() &#123;</div><div class="line">            <span class="keyword">this</span>.$root.$children[<span class="number">0</span>].loading = <span class="literal">true</span></div><div class="line">        &#125;,</div><div class="line">        hideLoading() &#123;</div><div class="line">            <span class="keyword">this</span>.$root.$children[<span class="number">0</span>].loading = <span class="literal">false</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// xx.vue里面调用</span></div><div class="line"><span class="keyword">import</span> AMixin <span class="keyword">from</span> <span class="string">'../../mixins/a'</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    mixins: [AMixin],</div><div class="line">    methods: &#123;</div><div class="line">        testFunc() &#123;</div><div class="line">            <span class="keyword">this</span>.showLoading() <span class="comment">// open</span></div><div class="line">            <span class="keyword">this</span>.hideLoading() <span class="comment">// close</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></li></ul><h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>1、这里主要考察的是对$root的灵活运用；<br>2、如果是全局页面跳转转场效果的话，Nuxt框架已经帮我们做了，我们直接自定义动画样式即可；<br>此文提到的使用场景，我们就是复用这个组件</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;使用场景：&quot;&gt;&lt;a href=&quot;#使用场景：&quot; class=&quot;headerlink&quot; title=&quot;使用场景：&quot;&gt;&lt;/a&gt;使用场景：&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;在Vue（ssr）项目中，当用户进行交互的时，如果需要加上Loading动画（项目中Loading一般封
+      
+    
+    </summary>
+    
+      <category term="Vue" scheme="http://www.xxxhj.cn/categories/Vue/"/>
+    
+    
+      <category term="Nuxt/Vue" scheme="http://www.xxxhj.cn/tags/Nuxt-Vue/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>opacity和visiblity</title>
+    <link href="http://www.xxxhj.cn/2017/09/10/opacity%E5%92%8Cvisiblity/"/>
+    <id>http://www.xxxhj.cn/2017/09/10/opacity和visiblity/</id>
+    <published>2017-09-09T17:19:07.000Z</published>
+    <updated>2017-09-10T05:23:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><code>opacity:</code>设置父元素隐藏，设置子元素显示将<code>失效</code></li><li><code>visiblity:</code>设置父元素隐藏，设置子元素显示将<code>成功</code></li></ul><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">.item1 &#123;</div><div class="line">    width: <span class="number">400</span>px;</div><div class="line">    height: <span class="number">400</span>px;</div><div class="line">    padding: <span class="number">100</span>px;</div><div class="line">    box-sizing: border-box;</div><div class="line">    background-color: green;</div><div class="line">    text-align: center;</div><div class="line">    <span class="comment">/*opacity: 0;*/</span></div><div class="line">    visibility: hidden</div><div class="line">&#125;</div><div class="line">.item2 &#123;</div><div class="line">    width: <span class="number">200</span>px;</div><div class="line">    height: <span class="number">200</span>px;</div><div class="line">    background-color: fuchsia;</div><div class="line">    <span class="comment">/*opacity: 1;*/</span></div><div class="line">    visibility: visible</div><div class="line">&#125;</div><div class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"item1"</span>&gt;</div><div class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"item2"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></div><div class="line">&lt;<span class="regexp">/div&gt;</span></div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ul&gt;
+&lt;li&gt;&lt;code&gt;opacity:&lt;/code&gt;设置父元素隐藏，设置子元素显示将&lt;code&gt;失效&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;visiblity:&lt;/code&gt;设置父元素隐藏，设置子元素显示将&lt;code&gt;成功&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;fi
+      
+    
+    </summary>
+    
+      <category term="javaScript" scheme="http://www.xxxhj.cn/categories/javaScript/"/>
+    
+    
+      <category term="css" scheme="http://www.xxxhj.cn/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用正则获取当前URL中的参数</title>
+    <link href="http://www.xxxhj.cn/2017/06/09/%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8DURL%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0/"/>
+    <id>http://www.xxxhj.cn/2017/06/09/使用正则获取当前URL中的参数/</id>
+    <published>2017-06-09T12:58:32.000Z</published>
+    <updated>2017-06-09T13:03:10.000Z</updated>
+    
+    <content type="html"><![CDATA[<p> <strong>使用场景：</strong>在前台，当需要通过当前url这个的参数处理一些逻辑的时候，可以使用此方法。<br> <strong>函数如下：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getQueryString</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|&amp;)"</span> + name + <span class="string">"=([^&amp;]*)(&amp;|$)"</span>, <span class="string">"i"</span>);</div><div class="line">    <span class="keyword">var</span> r = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>).match(reg);</div><div class="line">    <span class="keyword">if</span> (r != <span class="literal">null</span>) <span class="keyword">return</span> <span class="built_in">unescape</span>(r[<span class="number">2</span>]);</div><div class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><p><strong>使用方法：</strong>name-参数名称为字符串形式。若当前链接后面的参数为<code>?name=itonline&amp;sex=gg&amp;age=18</code>，则获取name参数值的调用方式为：<code>getQueryString(&quot;name&quot;)</code>;</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt; &lt;strong&gt;使用场景：&lt;/strong&gt;在前台，当需要通过当前url这个的参数处理一些逻辑的时候，可以使用此方法。&lt;br&gt; &lt;strong&gt;函数如下：&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;t
+      
+    
+    </summary>
+    
+      <category term="javaScript/正则表达式" scheme="http://www.xxxhj.cn/categories/javaScript-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+    
+      <category term="URL" scheme="http://www.xxxhj.cn/tags/URL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS中innerHTML、outerHTML、innerText、outerText的用法与区别</title>
+    <link href="http://www.xxxhj.cn/2017/05/03/JS%E4%B8%ADinnerHTML%E3%80%81outerHTML%E3%80%81innerText%E3%80%81outerText%E7%9A%84%E7%94%A8%E6%B3%95%E4%B8%8E%E5%8C%BA%E5%88%AB/"/>
+    <id>http://www.xxxhj.cn/2017/05/03/JS中innerHTML、outerHTML、innerText、outerText的用法与区别/</id>
+    <published>2017-05-03T11:58:49.000Z</published>
+    <updated>2017-05-03T12:28:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>–转自<a href="http://blog.163.com/yw_0721/blog/static/7164579720102932157759/" target="_blank" rel="external">http://blog.163.com/yw_0721/blog/static/7164579720102932157759/</a></p><p>在JS中可以使用：<br><img src="http://img.ph.126.net/w-wNA1rVd-dnL69Mi1cHcA==/3255258105659357017.jpg?_=2768532" alt="img"></p><h3 id="innerHTML"><a href="#innerHTML" class="headerlink" title="innerHTML:"></a>innerHTML:</h3><p>也就是从对象的起始位置到终止位置的全部内容,包括Html标签。</p><h3 id="innerText"><a href="#innerText" class="headerlink" title="innerText:"></a>innerText:</h3><p>从起始位置到终止位置的内容, 但它去除Html标签。</p><h3 id="outerHTML"><a href="#outerHTML" class="headerlink" title="outerHTML:"></a>outerHTML:</h3><p>除了包含innerHTML的全部内容外, 还包含对象标签本身。</p><h3 id="outerText"><a href="#outerText" class="headerlink" title="outerText:"></a>outerText:</h3><p>设置(包括标签)或获取(不包括标签)对象的文本 。<br><strong>示例：</strong><br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"test"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"color:red"</span>&gt;</span>test1<span class="tag">&lt;/<span class="name">span</span>&gt;</span> test2</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;a href=<span class="string">"javascript:alert(test.innerHTML)"</span>&gt;innerHTML内容&lt;<span class="regexp">/a&gt;</span></div><div class="line"><span class="regexp">&lt;a href="javascript:alert(test.innerText)"&gt;innerText内容&lt;/</span>a&gt;</div><div class="line">&lt;a href=<span class="string">"javascript:alert(test.outerHTML)"</span>&gt;outerHTML内容&lt;<span class="regexp">/a&gt;</span></div></pre></td></tr></table></figure><p>###特别说明：<br>innerHTML是符合W3C标准的属性，而innerText只适用于IE浏览器，因此，尽可能地去使用innerHTML，而少用innerText，如果要输出不含HTML标签的内容，可以使用innerHTML取得包含HTML标签的内容后，再用正则表达式去除HTML标签，下面是一个简单的符合W3C标准的示例：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a href=<span class="string">"javascript:alert(document.getElementById('test').innerHTML.replace(/&lt;.+?&gt;/gim,''))"</span>&gt;无HTML,符合W3C标准&lt;<span class="regexp">/a&gt;</span></div></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;–转自&lt;a href=&quot;http://blog.163.com/yw_0721/blog/static/7164579720102932157759/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://blog.163.com/yw_0721/b
+      
+    
+    </summary>
+    
+      <category term="javaScript" scheme="http://www.xxxhj.cn/categories/javaScript/"/>
+    
+    
+      <category term="innerHTML、outerHTML、innerText、outerText" scheme="http://www.xxxhj.cn/tags/innerHTML%E3%80%81outerHTML%E3%80%81innerText%E3%80%81outerText/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>break-continue-return之间的区别</title>
+    <link href="http://www.xxxhj.cn/2017/04/07/break-continue-return%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://www.xxxhj.cn/2017/04/07/break-continue-return之间的区别/</id>
+    <published>2017-04-07T14:44:31.000Z</published>
+    <updated>2017-04-08T09:26:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="break"><a href="#break" class="headerlink" title="break"></a>break</h2><h3 id="break-语句用于退出-switch-语句或循环语句-for-for-…-in-while-do-…-while-。"><a href="#break-语句用于退出-switch-语句或循环语句-for-for-…-in-while-do-…-while-。" class="headerlink" title="break 语句用于退出 switch 语句或循环语句(for, for … in, while, do … while)。"></a>break 语句用于退出 switch 语句或循环语句(for, for … in, while, do … while)。</h3><p>当 break 语句用于 switch 语句中时，会跳出 switch 代码块(终止执行其代码)。如：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> day;</div><div class="line"><span class="keyword">switch</span> (<span class="keyword">new</span> <span class="built_in">Date</span>().getDay()) &#123;</div><div class="line">    <span class="keyword">case</span> <span class="number">0</span>:</div><div class="line">        day = <span class="string">"Sunday"</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> <span class="number">1</span>:</div><div class="line">        day = <span class="string">"Monday"</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> <span class="number">2</span>:</div><div class="line">        day = <span class="string">"Tuesday"</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> <span class="number">3</span>:</div><div class="line">        day = <span class="string">"Wednesday"</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> <span class="number">4</span>:</div><div class="line">        day = <span class="string">"Thursday"</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> <span class="number">5</span>:</div><div class="line">        day = <span class="string">"Friday"</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> <span class="number">6</span>:</div><div class="line">        day = <span class="string">"Saturday"</span>;</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(day);</div></pre></td></tr></table></figure><p>当 break 语句用于for循环语句时，(跳出整个循环体)会终止执行循环，并执行循环后代码(如果有的话)。如：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> iSum = <span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>;i&lt;<span class="number">101</span>;i++)&#123;</div><div class="line">    <span class="keyword">if</span>(i == <span class="number">5</span>)&#123;</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    iSum +=i;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">console</span>.log(iSum); <span class="comment">//10</span></div><div class="line">&#125;())</div></pre></td></tr></table></figure><h2 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h2><h3 id="continue-跳过当前条件的循环-用于跳过循环中的一个迭代，并继续执行循环中的下一个迭代-。"><a href="#continue-跳过当前条件的循环-用于跳过循环中的一个迭代，并继续执行循环中的下一个迭代-。" class="headerlink" title="continue 跳过当前条件的循环(用于跳过循环中的一个迭代，并继续执行循环中的下一个迭代)。"></a>continue 跳过<code>当前条件</code>的循环(用于跳过循环中的一个迭代，并继续执行循环中的下一个迭代)。</h3><p><strong>continue</strong> 与 <strong>break</strong>语句的<code>区别</code>是， <strong>break</strong> 是结束整个循环体， <strong>continue </strong>是结束单次循环。</p><p><code>注意：</code>  <strong>continue </strong> 语句（不带标签引用），只能用在循环或  switch 中。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在 while 循环中</span></div><div class="line"><span class="keyword">var</span> text = <span class="string">""</span>;</div><div class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line"><span class="keyword">while</span> (i &lt; <span class="number">5</span>) &#123;</div><div class="line">    i++;</div><div class="line">    <span class="keyword">if</span> (i == <span class="number">3</span>) &#123;</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">    &#125;</div><div class="line"><span class="built_in">console</span>.log(i); <span class="comment">//1,2,4,5</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//在 for 循环中</span></div><div class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> iSum = <span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>;i&lt;<span class="number">101</span>;i++)&#123;</div><div class="line">    <span class="keyword">if</span>(i == <span class="number">5</span>)&#123;</div><div class="line">      <span class="keyword">continue</span>;</div><div class="line">    &#125;</div><div class="line">    iSum +=i;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">console</span>.log(iSum); <span class="comment">//5045</span></div><div class="line">&#125;())</div></pre></td></tr></table></figure><h2 id="return"><a href="#return" class="headerlink" title="return"></a>return</h2><h4 id="return表示-结束整个方法体-终止函数的执行并返回函数的值。"><a href="#return表示-结束整个方法体-终止函数的执行并返回函数的值。" class="headerlink" title="return表示(结束整个方法体)终止函数的执行并返回函数的值。"></a>return表示(结束整个方法体)终止函数的执行并返回函数的值。</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//用法1</span></div><div class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> iSum = <span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>;i&lt;<span class="number">101</span>;i++)&#123;</div><div class="line">    <span class="keyword">if</span>(i == <span class="number">5</span>)&#123;</div><div class="line">      <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    iSum +=i;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">console</span>.log(iSum); <span class="comment">//当i==5时，结束（return）了整个方法体，所以此时没有执行这行代码</span></div><div class="line">&#125;())</div><div class="line"></div><div class="line"><span class="comment">//用法2</span></div><div class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> iSum = <span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>;i&lt;<span class="number">101</span>;i++)&#123;</div><div class="line">    <span class="keyword">if</span>(i == <span class="number">5</span>)&#123;</div><div class="line">      <span class="comment">//return;</span></div><div class="line">      i = A(i);</div><div class="line">    &#125;</div><div class="line">    iSum +=i;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">console</span>.log(iSum); <span class="comment">//5015,i 跳过了5，6，7，8，9，此时的i设为了10</span></div><div class="line">&#125;())</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">i</span>)</span>&#123;</div><div class="line">  i+=<span class="number">5</span>;</div><div class="line">  <span class="keyword">return</span> i; <span class="comment">//i可选(非必填)。指定返回的函数值。如果忽略，A(i)函数将返回 undefined</span></div><div class="line">&#125;</div></pre></td></tr></table></figure><h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><h4 id="break-跳出整个循环体"><a href="#break-跳出整个循环体" class="headerlink" title="break:跳出整个循环体"></a>break:跳出整个循环体</h4><h4 id="continue-跳过当前条件的循环"><a href="#continue-跳过当前条件的循环" class="headerlink" title="continue:跳过当前条件的循环"></a>continue:跳过<code>当前条件</code>的循环</h4><h4 id="return：结束当前方法体"><a href="#return：结束当前方法体" class="headerlink" title="return：结束当前方法体"></a>return：结束当前方法体</h4>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;break&quot;&gt;&lt;a href=&quot;#break&quot; class=&quot;headerlink&quot; title=&quot;break&quot;&gt;&lt;/a&gt;break&lt;/h2&gt;&lt;h3 id=&quot;break-语句用于退出-switch-语句或循环语句-for-for-…-in-while-do-…-w
+      
+    
+    </summary>
+    
+      <category term="javaScript" scheme="http://www.xxxhj.cn/categories/javaScript/"/>
+    
+    
+      <category term="break/continue/return" scheme="http://www.xxxhj.cn/tags/break-continue-return/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS中typeof与instanceof的区别</title>
+    <link href="http://www.xxxhj.cn/2017/04/07/JS%E4%B8%ADtypeof%E4%B8%8Einstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://www.xxxhj.cn/2017/04/07/JS中typeof与instanceof的区别/</id>
+    <published>2017-04-07T08:40:36.000Z</published>
+    <updated>2017-04-07T10:01:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="JavaScript-中-typeof-和-instanceof-常用来判断一个变量是否为空，或者是什么类型的。区别："><a href="#JavaScript-中-typeof-和-instanceof-常用来判断一个变量是否为空，或者是什么类型的。区别：" class="headerlink" title="JavaScript 中 typeof 和 instanceof 常用来判断一个变量是否为空，或者是什么类型的。区别："></a>JavaScript 中 typeof 和 instanceof 常用来判断一个变量是否为空，或者是什么类型的。区别：</h3><h3 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h3><p>  typeof 是一个一元运算，放在一个运算数之前，运算数可以是任意类型。<br>  它返回值是一个字符串，该字符串说明运算数的类型。typeof 一般只能返回如下几个结果：<br>  number,boolean,string,function,object,undefined。我们可以使用 typeof 来获取一个变量是否存在，如 if(typeof a!=”undefined”){alert(“ok”)}，而不要去使用 if(a) 因为如果 a 不存在（未声明）则会出错，对于 Array,Null 等特殊对象使用 typeof 一律返回 object，这正是 typeof 的局限性。</p><h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><p>  instanceof 用于判断一个变量是否某个对象的实例，如:<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//判断a是否是Array的实例</span></div><div class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="built_in">Array</span>();</div><div class="line"><span class="built_in">console</span>.log(a <span class="keyword">instanceof</span> <span class="built_in">Array</span>); <span class="comment">//true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">//true</span></div><div class="line"><span class="comment">//所以，这里的 instanceof 测试的 object 是指 js 语法中的 object，不是指 dom 模型对象。</span></div><div class="line"><span class="built_in">console</span>.log(a <span class="keyword">instanceof</span> object); <span class="comment">//true, 因为 Array 是 object 的子类</span></div><div class="line"></div><div class="line"><span class="comment">//判断a是否是test的实例</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"><span class="keyword">var</span> a=<span class="keyword">new</span> test();</div><div class="line"><span class="built_in">console</span>.log(a <span class="keyword">instanceof</span> test); <span class="comment">//true</span></div><div class="line"></div><div class="line"> <span class="comment">// 判断 foo 是否是 Foo 类的实例 , 并且是否是其父类型的实例</span></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Aoo</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line"> Foo.prototype = <span class="keyword">new</span> Aoo();<span class="comment">//JavaScript 原型继承</span></div><div class="line"></div><div class="line"> <span class="keyword">var</span> foo = <span class="keyword">new</span> Foo();</div><div class="line"> <span class="built_in">console</span>.log(foo <span class="keyword">instanceof</span> Foo)<span class="comment">//true</span></div><div class="line"> <span class="built_in">console</span>.log(foo <span class="keyword">instanceof</span> Aoo)<span class="comment">//true</span></div><div class="line"> <span class="comment">//instanceof 复杂用法</span></div><div class="line"> <span class="built_in">console</span>.log(<span class="built_in">Object</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>);<span class="comment">//true</span></div><div class="line"> <span class="built_in">console</span>.log(<span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Function</span>);<span class="comment">//true</span></div><div class="line"> <span class="built_in">console</span>.log(<span class="built_in">Number</span> <span class="keyword">instanceof</span> <span class="built_in">Number</span>);<span class="comment">//false</span></div><div class="line"> <span class="built_in">console</span>.log(<span class="built_in">String</span> <span class="keyword">instanceof</span> <span class="built_in">String</span>);<span class="comment">//false</span></div><div class="line"> <span class="built_in">console</span>.log(<span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>);<span class="comment">//true</span></div><div class="line"> <span class="built_in">console</span>.log(Foo <span class="keyword">instanceof</span> <span class="built_in">Function</span>);<span class="comment">//true</span></div><div class="line"> <span class="built_in">console</span>.log(Foo <span class="keyword">instanceof</span> Foo);<span class="comment">//false</span></div></pre></td></tr></table></figure></p><p>   未完待续…</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;JavaScript-中-typeof-和-instanceof-常用来判断一个变量是否为空，或者是什么类型的。区别：&quot;&gt;&lt;a href=&quot;#JavaScript-中-typeof-和-instanceof-常用来判断一个变量是否为空，或者是什么类型的。区别：&quot; 
+      
+    
+    </summary>
+    
+      <category term="javaScript" scheme="http://www.xxxhj.cn/categories/javaScript/"/>
+    
+    
+      <category term="typeof/instanceof" scheme="http://www.xxxhj.cn/tags/typeof-instanceof/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>移动web页面，input、textarea获取焦点弹出系统虚拟键盘时，挡住input、textarea的解决方案</title>
+    <link href="http://www.xxxhj.cn/2017/04/07/%E7%A7%BB%E5%8A%A8web%E9%A1%B5%E9%9D%A2%EF%BC%8Cinput%E3%80%81textarea%E8%8E%B7%E5%8F%96%E7%84%A6%E7%82%B9%E5%BC%B9%E5%87%BA%E7%B3%BB%E7%BB%9F%E8%99%9A%E6%8B%9F%E9%94%AE%E7%9B%98%E6%97%B6%EF%BC%8C%E6%8C%A1%E4%BD%8Finput%E3%80%81textarea%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <id>http://www.xxxhj.cn/2017/04/07/移动web页面，input、textarea获取焦点弹出系统虚拟键盘时，挡住input、textarea的解决方案/</id>
+    <published>2017-04-07T08:40:36.000Z</published>
+    <updated>2018-02-06T05:19:41.287Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ul><li>在移动web页面里，当点击input、textarea获取到焦点弹出系统虚拟键盘后，虚拟键盘挡住了输入框的情况；这种问题一般出现在部分android机型中，在ios机型中一般不会出现这个问题</li><li>在移动web页面里，只有可以滑动的时候就可以使用这个方法处理一些类似于锚点的问题，<strong>并非一定是输入框才可以使用</strong></li></ul><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ul><li>通过js动态处理；在元素（输入框）被操作后，若元素在可视区域内，则不做处理。反之通过js将该元素的位置移动到可视区域内即可</li><li>使用W3C标准的scrollIntoView()、scrollIntoViewNeeded()方法处理,该方法就是让当前的元素滚动到浏览器窗口的可视区域内；两个方法共同使用可以兼容大部分的浏览器（移动端），该方法的参数类型是boolean值，默认参数是true。如果为true，元素的顶端将和其所在滚动区的可视区域的顶端对齐。反之，元素的底端将和其所在滚动区的可视区域的底端对齐。</li></ul><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><ul><li><p>原生js里面</p><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"chunk"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"scrollIntoView"</span>&gt;</span>scrollIntoView top<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"scrollIntoViewIfNeeded-top"</span>&gt;</span>scrollIntoViewIfNeeded top<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"scrollIntoViewIfNeeded-bottom"</span>&gt;</span>scrollIntoViewIfNeeded botom<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript">    <span class="keyword">const</span> scrollIntoView = <span class="built_in">document</span>.querySelector(<span class="string">'.scrollIntoView'</span>);</span></div><div class="line"><span class="javascript">    <span class="keyword">const</span> scrollIntoViewIfNeededTop = <span class="built_in">document</span>.querySelector(<span class="string">'.scrollIntoViewIfNeeded-top'</span>);</span></div><div class="line"><span class="javascript">    <span class="keyword">const</span> scrollIntoViewIfNeededBottom = <span class="built_in">document</span>.querySelector(<span class="string">'.scrollIntoViewIfNeeded-bottom'</span>);</span></div><div class="line"><span class="javascript">    <span class="keyword">const</span> test = <span class="built_in">document</span>.querySelector(<span class="string">'.chunk'</span>);</span></div><div class="line"><span class="javascript">    scrollIntoView.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></div><div class="line"><span class="javascript">      test.scrollIntoView(<span class="literal">true</span>);</span></div><div class="line"><span class="undefined">    &#125;);</span></div><div class="line"><span class="javascript">    scrollIntoViewIfNeededTop.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></div><div class="line"><span class="javascript">      test.scrollIntoViewIfNeeded(<span class="literal">true</span>);</span></div><div class="line"><span class="undefined">    &#125;);</span></div><div class="line"><span class="javascript">    scrollIntoViewIfNeededBottom.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></div><div class="line"><span class="javascript">      test.scrollIntoViewIfNeeded(<span class="literal">false</span>);</span></div><div class="line"><span class="undefined">    &#125;);</span></div><div class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></li><li><p>vue里面</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">    &lt;li class=&quot;requirement-description&quot;&gt;</div><div class="line">        &lt;div class=&quot;li-inner&quot;&gt;</div><div class="line">            &lt;span&gt;测试数据&lt;/span&gt;</div><div class="line">            &lt;textarea maxlength=&quot;200&quot;</div><div class="line">                      name=&quot;textarea&quot;</div><div class="line">                      @focus=&quot;textAreaFocus&quot;</div><div class="line">                      ref=&quot;textAreaF&quot;&gt;&lt;/textarea&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">    &lt;/li&gt;</div><div class="line">&lt;/template&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    export default &#123;</div><div class="line">        name: &apos;Item-Textarea&apos;,</div><div class="line">        methods: &#123;</div><div class="line">            textAreaFocus() &#123;</div><div class="line">                this.$refs.textAreaF.scrollIntoView(false)</div><div class="line">                this.$refs.textAreaF.scrollIntoViewIfNeeded(false)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;使用场景&quot;&gt;&lt;a href=&quot;#使用场景&quot; class=&quot;headerlink&quot; title=&quot;使用场景&quot;&gt;&lt;/a&gt;使用场景&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;在移动web页面里，当点击input、textarea获取到焦点弹出系统虚拟键盘后，虚拟键盘挡住了输入框的情况；
+      
+    
+    </summary>
+    
+      <category term="javaScript" scheme="http://www.xxxhj.cn/categories/javaScript/"/>
+    
+    
+      <category term="scrollIntoView()、scrollIntoViewNeeded()" scheme="http://www.xxxhj.cn/tags/scrollIntoView-%E3%80%81scrollIntoViewNeeded/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NodeJS 文件(夹)压缩/解压(zip/unzip)</title>
+    <link href="http://www.xxxhj.cn/2017/03/23/NodeJS-%E6%96%87%E4%BB%B6-%E5%A4%B9-%E5%8E%8B%E7%BC%A9-%E8%A7%A3%E5%8E%8B-zip-unzip/"/>
+    <id>http://www.xxxhj.cn/2017/03/23/NodeJS-文件-夹-压缩-解压-zip-unzip/</id>
+    <published>2017-03-23T09:56:48.000Z</published>
+    <updated>2017-03-23T10:06:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>我使用的比较靠谱的,也比较简单.其中archiver很强大支持zip格式tar格式,只需要提供路径就可以压缩已存在的文件夹.</p><p>压缩：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> archiver = <span class="built_in">require</span>(<span class="string">'archiver'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> output = fs.createWriteStream(<span class="string">'archiver-unzip.zip'</span>);</div><div class="line"><span class="keyword">var</span> archive = archiver(<span class="string">'zip'</span>);</div><div class="line"></div><div class="line">archive.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</div><div class="line">     <span class="keyword">throw</span> err;</div><div class="line"> &#125;);</div><div class="line"></div><div class="line">archive.pipe(output);</div><div class="line">archive.bulk([</div><div class="line">    &#123; <span class="attr">src</span>: [<span class="string">'archiver/**'</span>]&#125;</div><div class="line">]);</div><div class="line">archive.finalize();</div></pre></td></tr></table></figure></p><p>解压:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</div><div class="line"><span class="keyword">var</span> unzip = <span class="built_in">require</span>(<span class="string">"unzip"</span>);</div><div class="line"></div><div class="line">fs.createReadStream(<span class="string">'archiver-unzip.zip'</span>).pipe(unzip.Extract(&#123; <span class="attr">path</span>: <span class="string">'unarchive'</span> &#125;));</div></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;我使用的比较靠谱的,也比较简单.其中archiver很强大支持zip格式tar格式,只需要提供路径就可以压缩已存在的文件夹.&lt;/p&gt;
+&lt;p&gt;压缩：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;g
+      
+    
+    </summary>
+    
+      <category term="nodeJs" scheme="http://www.xxxhj.cn/categories/nodeJs/"/>
+    
+    
+      <category term="nodeJs/zip/unzip" scheme="http://www.xxxhj.cn/tags/nodeJs-zip-unzip/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>webstorm下调试node提示：v8debug is not defined</title>
+    <link href="http://www.xxxhj.cn/2017/03/23/webstorm%E4%B8%8B%E8%B0%83%E8%AF%95node%E6%8F%90%E7%A4%BA%EF%BC%9Av8debug-is-not-defined/"/>
+    <id>http://www.xxxhj.cn/2017/03/23/webstorm下调试node提示：v8debug-is-not-defined/</id>
+    <published>2017-03-23T09:53:09.000Z</published>
+    <updated>2017-03-23T09:56:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>解决步骤：Run/Debug configurations  -&gt;configuration-&gt;Node parameters: –expose_debug_as=v8debug</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;解决步骤：Run/Debug configurations  -&amp;gt;configuration-&amp;gt;Node parameters: –expose_debug_as=v8debug&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="WebStorm" scheme="http://www.xxxhj.cn/categories/WebStorm/"/>
+    
+    
+      <category term="v8debug" scheme="http://www.xxxhj.cn/tags/v8debug/"/>
+    
+  </entry>
+  
+</feed>
