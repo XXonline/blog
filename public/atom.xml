@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>IT在线</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://www.xxxhj.cn/"/>
+  <updated>2017-06-09T13:03:10.000Z</updated>
+  <id>http://www.xxxhj.cn/</id>
+  
+  <author>
+    <name>IT在线</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用正则获取当前URL中的参数</title>
+    <link href="http://www.xxxhj.cn/2017/06/09/%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8DURL%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0/"/>
+    <id>http://www.xxxhj.cn/2017/06/09/使用正则获取当前URL中的参数/</id>
+    <published>2017-06-09T12:58:32.000Z</published>
+    <updated>2017-06-09T13:03:10.000Z</updated>
+    
+    <content type="html"><![CDATA[<p> <strong>使用场景：</strong>在前台，当需要通过当前url这个的参数处理一些逻辑的时候，可以使用此方法。<br> <strong>函数如下：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getQueryString</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|&amp;)"</span> + name + <span class="string">"=([^&amp;]*)(&amp;|$)"</span>, <span class="string">"i"</span>);</span><br><span class="line">    <span class="keyword">var</span> r = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>).match(reg);</span><br><span class="line">    <span class="keyword">if</span> (r != <span class="literal">null</span>) <span class="keyword">return</span> <span class="built_in">unescape</span>(r[<span class="number">2</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>使用方法：</strong>name-参数名称为字符串形式。若当前链接后面的参数为<code>?name=itonline&amp;sex=gg&amp;age=18</code>，则获取name参数值的调用方式为：<code>getQueryString(&quot;name&quot;)</code>;</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; &lt;strong&gt;使用场景：&lt;/strong&gt;在前台，当需要通过当前url这个的参数处理一些逻辑的时候，可以使用此方法。&lt;br&gt; &lt;strong&gt;函数如下：&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;t
+    
+    </summary>
+    
+      <category term="javaScript/正则表达式" scheme="http://www.xxxhj.cn/categories/javaScript-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+    
+      <category term="URL" scheme="http://www.xxxhj.cn/tags/URL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS中innerHTML、outerHTML、innerText、outerText的用法与区别</title>
+    <link href="http://www.xxxhj.cn/2017/05/03/JS%E4%B8%ADinnerHTML%E3%80%81outerHTML%E3%80%81innerText%E3%80%81outerText%E7%9A%84%E7%94%A8%E6%B3%95%E4%B8%8E%E5%8C%BA%E5%88%AB/"/>
+    <id>http://www.xxxhj.cn/2017/05/03/JS中innerHTML、outerHTML、innerText、outerText的用法与区别/</id>
+    <published>2017-05-03T11:58:49.000Z</published>
+    <updated>2017-05-03T12:28:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>–转自<a href="http://blog.163.com/yw_0721/blog/static/7164579720102932157759/" target="_blank" rel="noopener">http://blog.163.com/yw_0721/blog/static/7164579720102932157759/</a></p>
+<p>在JS中可以使用：<br><img src="http://img.ph.126.net/w-wNA1rVd-dnL69Mi1cHcA==/3255258105659357017.jpg?_=2768532" alt="img"></p>
+<h3 id="innerHTML"><a href="#innerHTML" class="headerlink" title="innerHTML:"></a>innerHTML:</h3><p>也就是从对象的起始位置到终止位置的全部内容,包括Html标签。</p>
+<h3 id="innerText"><a href="#innerText" class="headerlink" title="innerText:"></a>innerText:</h3><p>从起始位置到终止位置的内容, 但它去除Html标签。</p>
+<h3 id="outerHTML"><a href="#outerHTML" class="headerlink" title="outerHTML:"></a>outerHTML:</h3><p>除了包含innerHTML的全部内容外, 还包含对象标签本身。</p>
+<h3 id="outerText"><a href="#outerText" class="headerlink" title="outerText:"></a>outerText:</h3><p>设置(包括标签)或获取(不包括标签)对象的文本 。<br><strong>示例：</strong><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"test"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"color:red"</span>&gt;</span>test1<span class="tag">&lt;/<span class="name">span</span>&gt;</span> test2</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=<span class="string">"javascript:alert(test.innerHTML)"</span>&gt;innerHTML内容&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">&lt;a href="javascript:alert(test.innerText)"&gt;innerText内容&lt;/</span>a&gt;</span><br><span class="line">&lt;a href=<span class="string">"javascript:alert(test.outerHTML)"</span>&gt;outerHTML内容&lt;<span class="regexp">/a&gt;</span></span><br></pre></td></tr></table></figure>
+<p>###特别说明：<br>innerHTML是符合W3C标准的属性，而innerText只适用于IE浏览器，因此，尽可能地去使用innerHTML，而少用innerText，如果要输出不含HTML标签的内容，可以使用innerHTML取得包含HTML标签的内容后，再用正则表达式去除HTML标签，下面是一个简单的符合W3C标准的示例：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=<span class="string">"javascript:alert(document.getElementById('test').innerHTML.replace(/&lt;.+?&gt;/gim,''))"</span>&gt;无HTML,符合W3C标准&lt;<span class="regexp">/a&gt;</span></span><br></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;–转自&lt;a href=&quot;http://blog.163.com/yw_0721/blog/static/7164579720102932157759/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://blog.163.com/yw_0721/b
+    
+    </summary>
+    
+      <category term="javaScript" scheme="http://www.xxxhj.cn/categories/javaScript/"/>
+    
+    
+      <category term="innerHTML、outerHTML、innerText、outerText" scheme="http://www.xxxhj.cn/tags/innerHTML%E3%80%81outerHTML%E3%80%81innerText%E3%80%81outerText/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>break-continue-return之间的区别</title>
+    <link href="http://www.xxxhj.cn/2017/04/07/break-continue-return%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://www.xxxhj.cn/2017/04/07/break-continue-return之间的区别/</id>
+    <published>2017-04-07T14:44:31.000Z</published>
+    <updated>2017-04-08T09:26:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="break"><a href="#break" class="headerlink" title="break"></a>break</h2><h3 id="break-语句用于退出-switch-语句或循环语句-for-for-…-in-while-do-…-while-。"><a href="#break-语句用于退出-switch-语句或循环语句-for-for-…-in-while-do-…-while-。" class="headerlink" title="break 语句用于退出 switch 语句或循环语句(for, for … in, while, do … while)。"></a>break 语句用于退出 switch 语句或循环语句(for, for … in, while, do … while)。</h3><p>当 break 语句用于 switch 语句中时，会跳出 switch 代码块(终止执行其代码)。如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> day;</span><br><span class="line"><span class="keyword">switch</span> (<span class="keyword">new</span> <span class="built_in">Date</span>().getDay()) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">        day = <span class="string">"Sunday"</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        day = <span class="string">"Monday"</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        day = <span class="string">"Tuesday"</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        day = <span class="string">"Wednesday"</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">        day = <span class="string">"Thursday"</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">        day = <span class="string">"Friday"</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">        day = <span class="string">"Saturday"</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(day);</span><br></pre></td></tr></table></figure>
+<p>当 break 语句用于for循环语句时，(跳出整个循环体)会终止执行循环，并执行循环后代码(如果有的话)。如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> iSum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>;i&lt;<span class="number">101</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(i == <span class="number">5</span>)&#123;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    iSum +=i;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(iSum); <span class="comment">//10</span></span><br><span class="line">&#125;())</span><br></pre></td></tr></table></figure>
+<h2 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h2><h3 id="continue-跳过当前条件的循环-用于跳过循环中的一个迭代，并继续执行循环中的下一个迭代-。"><a href="#continue-跳过当前条件的循环-用于跳过循环中的一个迭代，并继续执行循环中的下一个迭代-。" class="headerlink" title="continue 跳过当前条件的循环(用于跳过循环中的一个迭代，并继续执行循环中的下一个迭代)。"></a>continue 跳过<code>当前条件</code>的循环(用于跳过循环中的一个迭代，并继续执行循环中的下一个迭代)。</h3><p><strong>continue</strong> 与 <strong>break</strong>语句的<code>区别</code>是， <strong>break</strong> 是结束整个循环体， <strong>continue </strong>是结束单次循环。</p>
+<p><code>注意：</code>  <strong>continue </strong> 语句（不带标签引用），只能用在循环或  switch 中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在 while 循环中</span></span><br><span class="line"><span class="keyword">var</span> text = <span class="string">""</span>;</span><br><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; <span class="number">5</span>) &#123;</span><br><span class="line">    i++;</span><br><span class="line">    <span class="keyword">if</span> (i == <span class="number">3</span>) &#123;</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="built_in">console</span>.log(i); <span class="comment">//1,2,4,5</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在 for 循环中</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> iSum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>;i&lt;<span class="number">101</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(i == <span class="number">5</span>)&#123;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    iSum +=i;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(iSum); <span class="comment">//5045</span></span><br><span class="line">&#125;())</span><br></pre></td></tr></table></figure>
+<h2 id="return"><a href="#return" class="headerlink" title="return"></a>return</h2><h4 id="return表示-结束整个方法体-终止函数的执行并返回函数的值。"><a href="#return表示-结束整个方法体-终止函数的执行并返回函数的值。" class="headerlink" title="return表示(结束整个方法体)终止函数的执行并返回函数的值。"></a>return表示(结束整个方法体)终止函数的执行并返回函数的值。</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//用法1</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> iSum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>;i&lt;<span class="number">101</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(i == <span class="number">5</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    iSum +=i;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(iSum); <span class="comment">//当i==5时，结束（return）了整个方法体，所以此时没有执行这行代码</span></span><br><span class="line">&#125;())</span><br><span class="line"></span><br><span class="line"><span class="comment">//用法2</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> iSum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>;i&lt;<span class="number">101</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(i == <span class="number">5</span>)&#123;</span><br><span class="line">      <span class="comment">//return;</span></span><br><span class="line">      i = A(i);</span><br><span class="line">    &#125;</span><br><span class="line">    iSum +=i;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(iSum); <span class="comment">//5015,i 跳过了5，6，7，8，9，此时的i设为了10</span></span><br><span class="line">&#125;())</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">  i+=<span class="number">5</span>;</span><br><span class="line">  <span class="keyword">return</span> i; <span class="comment">//i可选(非必填)。指定返回的函数值。如果忽略，A(i)函数将返回 undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><h4 id="break-跳出整个循环体"><a href="#break-跳出整个循环体" class="headerlink" title="break:跳出整个循环体"></a>break:跳出整个循环体</h4><h4 id="continue-跳过当前条件的循环"><a href="#continue-跳过当前条件的循环" class="headerlink" title="continue:跳过当前条件的循环"></a>continue:跳过<code>当前条件</code>的循环</h4><h4 id="return：结束当前方法体"><a href="#return：结束当前方法体" class="headerlink" title="return：结束当前方法体"></a>return：结束当前方法体</h4>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;break&quot;&gt;&lt;a href=&quot;#break&quot; class=&quot;headerlink&quot; title=&quot;break&quot;&gt;&lt;/a&gt;break&lt;/h2&gt;&lt;h3 id=&quot;break-语句用于退出-switch-语句或循环语句-for-for-…-in-while-do-…-w
+    
+    </summary>
+    
+      <category term="javaScript" scheme="http://www.xxxhj.cn/categories/javaScript/"/>
+    
+    
+      <category term="break/continue/return" scheme="http://www.xxxhj.cn/tags/break-continue-return/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS中typeof与instanceof的区别</title>
+    <link href="http://www.xxxhj.cn/2017/04/07/JS%E4%B8%ADtypeof%E4%B8%8Einstanceof%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://www.xxxhj.cn/2017/04/07/JS中typeof与instanceof的区别/</id>
+    <published>2017-04-07T08:40:36.000Z</published>
+    <updated>2017-04-07T10:01:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="JavaScript-中-typeof-和-instanceof-常用来判断一个变量是否为空，或者是什么类型的。区别："><a href="#JavaScript-中-typeof-和-instanceof-常用来判断一个变量是否为空，或者是什么类型的。区别：" class="headerlink" title="JavaScript 中 typeof 和 instanceof 常用来判断一个变量是否为空，或者是什么类型的。区别："></a>JavaScript 中 typeof 和 instanceof 常用来判断一个变量是否为空，或者是什么类型的。区别：</h3><h3 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h3><p>  typeof 是一个一元运算，放在一个运算数之前，运算数可以是任意类型。<br>  它返回值是一个字符串，该字符串说明运算数的类型。typeof 一般只能返回如下几个结果：<br>  number,boolean,string,function,object,undefined。我们可以使用 typeof 来获取一个变量是否存在，如 if(typeof a!=”undefined”){alert(“ok”)}，而不要去使用 if(a) 因为如果 a 不存在（未声明）则会出错，对于 Array,Null 等特殊对象使用 typeof 一律返回 object，这正是 typeof 的局限性。</p>
+<h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><p>  instanceof 用于判断一个变量是否某个对象的实例，如:<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断a是否是Array的实例</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line"><span class="built_in">console</span>.log(a <span class="keyword">instanceof</span> <span class="built_in">Array</span>); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">//true</span></span><br><span class="line"><span class="comment">//所以，这里的 instanceof 测试的 object 是指 js 语法中的 object，不是指 dom 模型对象。</span></span><br><span class="line"><span class="built_in">console</span>.log(a <span class="keyword">instanceof</span> object); <span class="comment">//true, 因为 Array 是 object 的子类</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//判断a是否是test的实例</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> a=<span class="keyword">new</span> test();</span><br><span class="line"><span class="built_in">console</span>.log(a <span class="keyword">instanceof</span> test); <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">// 判断 foo 是否是 Foo 类的实例 , 并且是否是其父类型的实例</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Aoo</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"> Foo.prototype = <span class="keyword">new</span> Aoo();<span class="comment">//JavaScript 原型继承</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">var</span> foo = <span class="keyword">new</span> Foo();</span><br><span class="line"> <span class="built_in">console</span>.log(foo <span class="keyword">instanceof</span> Foo)<span class="comment">//true</span></span><br><span class="line"> <span class="built_in">console</span>.log(foo <span class="keyword">instanceof</span> Aoo)<span class="comment">//true</span></span><br><span class="line"> <span class="comment">//instanceof 复杂用法</span></span><br><span class="line"> <span class="built_in">console</span>.log(<span class="built_in">Object</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>);<span class="comment">//true</span></span><br><span class="line"> <span class="built_in">console</span>.log(<span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Function</span>);<span class="comment">//true</span></span><br><span class="line"> <span class="built_in">console</span>.log(<span class="built_in">Number</span> <span class="keyword">instanceof</span> <span class="built_in">Number</span>);<span class="comment">//false</span></span><br><span class="line"> <span class="built_in">console</span>.log(<span class="built_in">String</span> <span class="keyword">instanceof</span> <span class="built_in">String</span>);<span class="comment">//false</span></span><br><span class="line"> <span class="built_in">console</span>.log(<span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>);<span class="comment">//true</span></span><br><span class="line"> <span class="built_in">console</span>.log(Foo <span class="keyword">instanceof</span> <span class="built_in">Function</span>);<span class="comment">//true</span></span><br><span class="line"> <span class="built_in">console</span>.log(Foo <span class="keyword">instanceof</span> Foo);<span class="comment">//false</span></span><br></pre></td></tr></table></figure></p>
+<p>   未完待续…</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;JavaScript-中-typeof-和-instanceof-常用来判断一个变量是否为空，或者是什么类型的。区别：&quot;&gt;&lt;a href=&quot;#JavaScript-中-typeof-和-instanceof-常用来判断一个变量是否为空，或者是什么类型的。区别：&quot; 
+    
+    </summary>
+    
+      <category term="javaScript" scheme="http://www.xxxhj.cn/categories/javaScript/"/>
+    
+    
+      <category term="typeof/instanceof" scheme="http://www.xxxhj.cn/tags/typeof-instanceof/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NodeJS 文件(夹)压缩/解压(zip/unzip)</title>
+    <link href="http://www.xxxhj.cn/2017/03/23/NodeJS-%E6%96%87%E4%BB%B6-%E5%A4%B9-%E5%8E%8B%E7%BC%A9-%E8%A7%A3%E5%8E%8B-zip-unzip/"/>
+    <id>http://www.xxxhj.cn/2017/03/23/NodeJS-文件-夹-压缩-解压-zip-unzip/</id>
+    <published>2017-03-23T09:56:48.000Z</published>
+    <updated>2017-03-23T10:06:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>我使用的比较靠谱的,也比较简单.其中archiver很强大支持zip格式tar格式,只需要提供路径就可以压缩已存在的文件夹.</p>
+<p>压缩：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> archiver = <span class="built_in">require</span>(<span class="string">'archiver'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> output = fs.createWriteStream(<span class="string">'archiver-unzip.zip'</span>);</span><br><span class="line"><span class="keyword">var</span> archive = archiver(<span class="string">'zip'</span>);</span><br><span class="line"></span><br><span class="line">archive.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">throw</span> err;</span><br><span class="line"> &#125;);</span><br><span class="line"></span><br><span class="line">archive.pipe(output);</span><br><span class="line">archive.bulk([</span><br><span class="line">    &#123; <span class="attr">src</span>: [<span class="string">'archiver/**'</span>]&#125;</span><br><span class="line">]);</span><br><span class="line">archive.finalize();</span><br></pre></td></tr></table></figure></p>
+<p>解压:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">var</span> unzip = <span class="built_in">require</span>(<span class="string">"unzip"</span>);</span><br><span class="line"></span><br><span class="line">fs.createReadStream(<span class="string">'archiver-unzip.zip'</span>).pipe(unzip.Extract(&#123; <span class="attr">path</span>: <span class="string">'unarchive'</span> &#125;));</span><br></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我使用的比较靠谱的,也比较简单.其中archiver很强大支持zip格式tar格式,只需要提供路径就可以压缩已存在的文件夹.&lt;/p&gt;
+&lt;p&gt;压缩：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;g
+    
+    </summary>
+    
+      <category term="nodeJs" scheme="http://www.xxxhj.cn/categories/nodeJs/"/>
+    
+    
+      <category term="nodeJs/zip/unzip" scheme="http://www.xxxhj.cn/tags/nodeJs-zip-unzip/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>webstorm下调试node提示：v8debug is not defined</title>
+    <link href="http://www.xxxhj.cn/2017/03/23/webstorm%E4%B8%8B%E8%B0%83%E8%AF%95node%E6%8F%90%E7%A4%BA%EF%BC%9Av8debug-is-not-defined/"/>
+    <id>http://www.xxxhj.cn/2017/03/23/webstorm下调试node提示：v8debug-is-not-defined/</id>
+    <published>2017-03-23T09:53:09.000Z</published>
+    <updated>2017-03-23T09:56:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>解决步骤：Run/Debug configurations  -&gt;configuration-&gt;Node parameters: –expose_debug_as=v8debug</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;解决步骤：Run/Debug configurations  -&amp;gt;configuration-&amp;gt;Node parameters: –expose_debug_as=v8debug&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="WebStorm" scheme="http://www.xxxhj.cn/categories/WebStorm/"/>
+    
+    
+      <category term="v8debug" scheme="http://www.xxxhj.cn/tags/v8debug/"/>
+    
+  </entry>
+  
+</feed>
