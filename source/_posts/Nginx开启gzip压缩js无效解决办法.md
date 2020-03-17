@@ -1,5 +1,5 @@
 ---
-title: JS中typeof与instanceof的区别
+title: Nginx开启gzip压缩js无效解决办法
 date: 2018-03-16 16:40:36
 tags: gzip/nginx
 categories: Nginx
